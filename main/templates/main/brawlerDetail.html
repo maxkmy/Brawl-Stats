@@ -1,0 +1,9 @@
+{% extends "main/base.html" %}
+{% block content %}
+	{% if chart %}
+		<div class='brawler-chart'>
+			<h1 class="title">Trophy Progression</h2>
+			<img src="data:image/png;base64, {{chart|safe}}" class="chart">
+		</div>
+	{% endif %}
+{% endblock content %}

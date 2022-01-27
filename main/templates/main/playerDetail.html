@@ -1,0 +1,76 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+	<header>
+		<h1>Brawl Stats</h1>
+		<form action="" method="POST" id="special-form">
+			{% csrf_token %}
+			{{ playerForm }}
+			<button id="special-button">Enter</button>
+		</form>
+	</header>
+
+	<h1 class="first title"> User Profile </h1>
+	<div class="player-container">
+		<div>Player Tag: {{ playerTag }}</div>
+		<div>Name: {{ playerName}}</div>
+		<div>Trophies: {{ playerTrophies }}</div>
+		<div>Experience: {{ playerExperience }}</div>
+	</div>
+
+	<h1 class="title"> Brawler Cards </h1>
+	<p class="sub-title"> Click on cards to see trophy progressions</p>
+	<div class="card-container">
+		{% for brawler in brawlerList %}
+		<a href="{{ brawler.0 }}">
+			<div class="card">
+				<div class="card-text"><p>{{brawler.0}}</p></div>
+				<div class="card-image">  
+					{% with "main/images/"|add:brawler.0|add:".jpg" as url %}
+						<img src="{% static url%}" alt="fail">
+					{% endwith %} 
+				</div>
+				<div class="card-stats">
+					<div class="stat">
+						<div class="type">Power</div>
+						<div class="value">{{brawler.1}}</div>
+					</div>
+
+					<div class="stat border">
+						<div class="type">Rank</div>
+						<div class="value">{{brawler.2}}</div>
+					</div>
+
+					<div class="stat">
+						<div class="type">Trophies</div>
+						<div class="value">{{brawler.3}}</div>
+					</div>
+				</div>
+			</div>
+		</a>
+		{% endfor %}
+		<div class="filler">
+			<i aria-hidden="true"></i>
+		</div>
+		<div class="filler">
+			<i aria-hidden="true"></i>
+		</div>
+		<div class="filler">
+			<i aria-hidden="true"></i>
+		</div>
+		<div class="filler">
+			<i aria-hidden="true"></i>
+		</div>
+		<div class="filler">
+			<i aria-hidden="true"></i>
+		</div>
+		<div class="filler">
+			<i aria-hidden="true"></i>
+		</div>
+	</div>
+
+	{% if chart %}
+		<h1 class="title">Trophy Progression</h2>
+		<img src="data:image/png;base64, {{chart|safe}}" class="chart">
+	{% endif %}
+{% endblock content %}

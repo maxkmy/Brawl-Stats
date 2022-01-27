@@ -1,0 +1,12 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+	<div class="form-container">
+		<h1 class="font-page-title"> Brawl Stats </h1>
+		<form action="" method="POST">
+			{% csrf_token %}
+			{{ playerForm }}
+			<button>Enter</button>
+		</form>
+	</div>
+{% endblock content %}
